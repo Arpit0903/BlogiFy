@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% include 'header.html' %}
+{% load crispy_forms_tags %}
+
+<body>
+  {% if user.is_authenticated %}
+  <div class="card register-card" style="width: 46vw;">
+    <div class="card-body">
+      <h5 class="card-title text-center">New Blog</h5>
+      <form method="post">
+        {% csrf_token %}
+        <div class="blog_display">
+          {{ form.media }}
+          {{ form | crispy}}
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary text-center">Post &nbsp;<i class="fas fa-arrow-up"></i></button>
+        </div>
+      </form>
+    </div>
+  </div>
+  {% else %}
+  <h3 class="text-center" style="margin-top: 20vw;">You are not logged in! &nbsp;<a href="{% url 'login' %}">Log in</a></h3>
+  {% endif %}
+</body>
+</html>

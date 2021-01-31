@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{% include 'header.html' %}
+{% load crispy_forms_tags %}
+
+<body>
+    {% if user.is_authenticated %}
+    <h1 class="text-center" style="margin-top: 4vw; font-size: 3vw">Delete Blog</h1>
+    <form method="post">
+        {% csrf_token %}
+        <h6 class="text-center" style="margin-top: 4vw;"><strong>Are you sure you want to delete the blog " {{object.blog_title}} "?</strong></h6><br>
+        <div class="delete_btn" style="text-align: center;">
+            <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-primary">Cancel&nbsp;<i class="fas fa-times"></i></a>&nbsp;&nbsp;
+            <button type="submit" class="btn btn-danger">Delete &nbsp;<i class="fas fa-trash-alt"></i></button>
+        </div>
+    </form>
+    {% else %}
+    <h3 class="text-center" style="margin-top: 20vw;">You must be logged in! &nbsp;<a href="{% url 'login' %}">Log in</a></h3>
+    {% endif %}
+</body>
+</html>

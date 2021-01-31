@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+{% include 'header.html' %}
+<body>
+    <h1 class="card-title text-center" style="margin-top: 4vw; font-size: 4vw;"><strong>My Blogs</strong></h1>
+    {% for post in object_list %}
+    {% if user.id == post.author.id or user.is_superuser %}
+    <div class="card custom-card">
+        <div class="card-header">
+            <p><a href="#" class="user-details">{{post.author}}</a> | {{post.pub_date}}</p>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{post.blog_title}}</h5>
+            <p class="card-text text-muted">{{post.blog_content | safe}}</p>
+            <a class="btn btn-primary" href="{% url 'update_blog' post.pk %}">Edit &nbsp;<i class="far fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a class="btn btn-danger" href="{% url 'delete_blog' post.pk %}">Delete &nbsp;<i class="fas fa-trash-alt"></i></a>
+        </div>
+    </div>
+    {% endif %}
+    {% empty %}
+        <h1 class="text-center" style="margin-top: 20vw;">No articles yet.</h1>
+    {% endfor %}

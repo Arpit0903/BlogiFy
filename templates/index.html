@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% include 'header.html' %}
+<body>
+  {% for post in object_list %}
+  <div class="card custom-card">
+    <div class="card-header">
+      <p><a href="{% url 'user_posts' post.author.username %}" class="user-details">{{post.author}}</a> | {{post.pub_date}}</p>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{post.blog_title}}</h5>
+      <p class="card-text text-muted">{{post.blog_content | safe}}</p>
+      <a href="{% url 'article_detail' post.pk %}" class="btn btn-primary">Read More &nbsp;<i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+  {% empty %}
+    <h1 class="text-center" style="margin-top: 20vw;">No articles yet.</h1>
+  {% endfor %}
+  <div class="pagination container">
+    {% if is_paginated %}
+      {% if page_obj.has_previous %}
+        <!-- <a href="?page=1">First</a> -->
+        <a class="paginator" href="?page={{ page_obj.previous_page_number }}">Prev</a>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <a class="paginator" href="?page={{ num }}">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          <a class="paginator" href="?page={{ num }}">{{ num }} </a>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <a class="paginator" href="?page={{ page_obj.next_page_number }}">Next</a>
+        <!-- <a href="?page={{ page_obj.paginator.num_pages }}">Last</a> -->
+      {% endif %}
+    {% endif %}
+  </div>
+</body>
+</html>

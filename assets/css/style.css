@@ -1,0 +1,98 @@
+body {
+    background: linear-gradient(#1E9AD6, white);
+    background-repeat: no-repeat;
+    padding-top: 75px;
+}
+
+.navbar-custom {
+    background-color: #003366 !important;
+}
+
+.navbar-brand {
+    color: white;
+    font-size: 2vw;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+}
+
+.nav-link {
+    color: white !important;
+    font-size: 1.2vw;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+}
+
+.card {
+    width: 80vw;
+    margin: 0 auto;
+    margin-top: 6vw;
+    margin-bottom: 2vw;
+    box-shadow: 0 0 50px grey;
+}
+
+.card-title {
+    font-size: 2.4vw;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.card-header {
+    background-color: #003366;
+    color: white;
+}
+
+.user-details {
+    color: white;
+    text-decoration: none;
+}
+
+.register-card {
+    width: 40vw;
+    margin-top: 4vw;
+}
+
+.login-card {
+    width: 30vw;
+}
+
+.create-post-card {
+    width: 60vw;
+}
+
+.create-blog-heading {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.card-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    -webkit-box-orient: vertical;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1vw;
+}
+
+.blog_title {
+    /* margin-top: 2vw; */
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 2vw;
+}
+
+.blog_content {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.greet-user {
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+    padding: 0.7vw;
+}
+
+.alert-message {
+    color: red;
+}
+
+.article_detail {
+    margin-top: 10vw;
+}

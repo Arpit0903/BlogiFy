@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% include 'header.html' %}
+  <div class="card login-card">
+    <div class="card-body">
+      <h5 class="card-title text-center">Login</h5>
+      <form action="login" method="post"> 
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="formGroupExampleInput">Username or Email</label>
+            <input type="text" class="form-control" id="formGroupExampleInput" name="username" required>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" name="password" required>
+        </div>
+        <br>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">Sign In</button>
+        </div>
+      </form>
+      <div>
+        {% for message in messages %}
+        <small class="alert-message">{{message}}</small>
+        {% endfor %}
+      </div>
+      <small id="emailHelp" class="form-text text-muted">Don't have an account? <a href="{% url 'register' %}">Sign Up</a></small>
+    </div>
+  </div>   
+</body>
+</html>

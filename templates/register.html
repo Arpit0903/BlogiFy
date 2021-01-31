@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% include 'header.html' %}
+<body>
+  <div class="card register-card">
+    <div class="card-body">
+      <h5 class="card-title text-center">Join BlogiFy</h5>
+      <form action="register" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="formGroupExampleInput">First Name*</label>
+          <input type="text" class="form-control" id="formGroupExampleInput" name="firstname" required>
+        </div>
+        <div class="form-group">
+          <label for="formGroupExampleInput">Last Name*</label>
+          <input type="text" class="form-control" id="formGroupExampleInput" name="lastname" required>
+        </div> 
+        <div class="form-group">
+          <label for="formGroupExampleInput">Username*</label>
+          <input type="text" class="form-control" id="formGroupExampleInput" name="username" required>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address*</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" required>
+          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password*</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" name="password1" required>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Confirm Password*</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" name="password2" required>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">Sign Up</button>
+        </div>
+        <div>
+          {% for message in messages %}
+          <small class="alert-message">{{message}}</small>
+          {% endfor %}
+        </div>
+        <small id="emailHelp" class="form-text text-muted">Already have an account? <a href="{% url 'login' %}">Sign In</a></small>
+      </form>
+    </div>
+  </div>   
+</body>
+</html>

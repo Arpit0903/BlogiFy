@@ -1,0 +1,87 @@
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+{% include 'header.html' %}
+<body>
+  <div class="article_detail container">
+    <h1 class="blog_title text-left">{{object.blog_title}}</h1>
+    <div class="icons">
+      {% if object.author.username == 'arpit' %}
+        <p class="author_name">By: <a href="{% url 'user_posts' object.author.username %}">{{object.author.username}}</a></p>
+      {% else %}
+        <p class="author_name">By: <a href="{% url 'user_posts' object.author.username %}">{{object.author.first_name}} {{object.author.last_name}}</a></p>
+      {% endif %}
+      <h4 style="padding: 0.6vw;"><strong>Share:</strong></h4>
+      <a class="nav-item" href="http://www.facebook.com/sharer.php?u={{request.build_absolute_uri}}" target="_blank"><i class="fab fa-facebook fa-2x"></i></a>
+      <a class="nav-item" href="https://www.linkedin.com/shareArticle?mini=true&amp;url={{request.build_absolute_uri}}" target="_blank"><i class="fab fa-linkedin fa-2x"></i></a>
+      <a class="nav-item" href="https://twitter.com/share?url={{request.build_absolute_uri}}" target="_blank"><i class="fab fa-twitter fa-2x"></i></a>
+    </div>
+    <p class="blog_date">{{object.pub_date}}</p>
+    <hr style="width: 100%; color: black;">
+    <p class="blog_content">{{object.blog_content | safe}}</p>
+    <form id="like_unlike_form" action="{% url 'like_post' object.pk %}" method="POST">
+      {% csrf_token %}
+      {% if user.is_authenticated %}
+      <div class="like_unlike_btn">
+        {% if liked %}
+          <button class="like_button" type="submit" name="post_id" value="{{ object.id }}">
+            <i class="fas fa-thumbs-up fa-2x"></i> 
+          </button> Likes: {{ total_likes }}
+        {% else %}
+          <button class="unlike_button" type="submit" name="post_id" value="{{ object.id }}">
+            <i class="far fa-thumbs-up fa-2x"></i> 
+          </button> Likes: {{ total_likes }}
+        {% endif %}
+      </div>
+      {% else %}
+        <h5 style="margin-top: 2vw;"><strong><i class="fas fa-thumbs-up fa-1x"></i> {{ object.likes.count }} Likes</strong></h5>
+      {% endif %}
+    </form>
+  </div>
+  <hr style="width: 60vw;">
+
+  <!-- Comment Section -->
+  <h1 style="margin-left: 20vw;">Comments</h1> <br>
+  <div id="comments_section" style="margin-left: 20vw;">
+    {% if comments %} 
+    <strong class="text-secondary">{{ object.number_of_comments }} Comment{{ object.number_of_comments|pluralize }}</strong><br>
+    <!-- <hr> -->
+    <ul>
+      {% for comment in comments %}
+      <li>           
+      <div>
+          <span>
+            <strong class="text-primary"><a href="{% url 'user_posts' comment.author %}">{{ comment.author }}</a></strong>
+            <small class="text-muted">{{ comment.date_posted }}</small>
+          </span>
+          <p>
+            {{ comment.comment|safe }}
+          </p>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+      <strong class="text-secondary">No comments yet...</strong>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+    <form method="POST">
+      {% csrf_token %}
+      <div class="form-group" style="width: 30vw;">
+        {{ comment_form | crispy }}
+        <button class="btn btn-primary" type="submit">Add Comment</button>
+      </div>
+    </form>
+    {% else %}
+    <h6 style="margin-top: 2vw;  margin-left: 20vw;">You must be logged in to comment and like this post! &nbsp;<a href="{% url 'login' %}?next={{request.path}}">Log in</a></h6><br>
+    {% endif %}
+  </div>
+</body>
+<script>
+  $(document).ready(function(){
+    $("textarea").attr({"rows": "2",
+                        "cols": "15"
+    });
+  });
+</script>
+</html>
