@@ -90,8 +90,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'Blogify',
-        'USER': 'postgres',
-        'PASSWORD': 'arpit1999',
+        'USER': user,
+        'PASSWORD': password,
         'HOST': 'localhost'
     }
 }
